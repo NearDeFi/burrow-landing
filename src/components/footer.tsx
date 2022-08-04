@@ -1,3 +1,3 @@
 export default function Footer() {
-  return <div className="">footer</div>;
+  return <footer className="bg-pink-100">footer</footer>;
 }

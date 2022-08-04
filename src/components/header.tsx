@@ -1,3 +1,3 @@
 export default function Header() {
-  return <div className="">header</div>;
+  return <header className="bg-pink-100">header</header>;
 }
