@@ -1,4 +1,5 @@
 import { ReactComponent as HogSvg } from "~/assets/hog.svg";
+import { ReactComponent as PointerSvg } from "~/assets/pointer.svg";
 
 export default function Main() {
   return (
@@ -12,6 +13,7 @@ export default function Main() {
           <span className="text-greenish">8.46%</span> APY
         </h2>
       </div>
+      <PointerSvg className="w-[100%]" />
       <div className="flex justify-center items-end mb-[-32px]">
         <HogSvg />
       </div>
