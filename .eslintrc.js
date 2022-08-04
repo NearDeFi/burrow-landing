@@ -9,6 +9,7 @@ module.exports = {
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
+    "plugin:import/recommended",
     "plugin:prettier/recommended",
     "prettier",
   ],
@@ -55,10 +56,28 @@ module.exports = {
     "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/ban-ts-comment": 0,
     "@typescript-eslint/no-use-before-define": ["error", { variables: false }],
+    "import/order": [
+      "error",
+      {
+        pathGroups: [
+          {
+            pattern: "@/**",
+            group: "parent",
+            position: "before",
+          },
+        ],
+      },
+    ],
   },
   settings: {
     react: {
       version: "detect",
+    },
+    "import/resolver": {
+      alias: {
+        map: [["~", "./src"]],
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+      },
     },
   },
 };
