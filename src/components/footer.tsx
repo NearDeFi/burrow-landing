@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="flex justify-between p-2 text-xs">
+    <footer className="flex justify-between p-2 text-xs z-10">
       <div>&copy; 2022 All rights reserved</div>
       <div className="flex gap-2">
         <a
