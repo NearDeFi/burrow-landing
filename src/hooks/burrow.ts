@@ -5,7 +5,16 @@ import { Asset, transformAsset } from "~/utils";
 
 const SELECTED_ASSETS = ["DAI", "WBTC", "USDC", "AURORA", "ETH", "USDT", "USN", "wNEAR"];
 
+const EMPTY_ASSET: Asset = {
+  id: "---",
+  symbol: "---",
+  borrowAPR: "---",
+  tvl: "---",
+  icon: "---",
+};
+
 export const useAssets = () => {
+  const [selected, setSelectedAsset] = useState<Asset>(EMPTY_ASSET);
   const [assets, setAssets] = useState<Asset[]>([]);
 
   useEffect(() => {
@@ -19,5 +28,13 @@ export const useAssets = () => {
     );
   }, []);
 
-  return assets;
+  useEffect(() => {
+    if (assets.length > 0) {
+      setSelectedAsset(assets[0]);
+    }
+  }, [assets]);
+
+  const onSelect = (asset: Asset) => setSelectedAsset(asset);
+
+  return { assets, selected, onSelect };
 };
