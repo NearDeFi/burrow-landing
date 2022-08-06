@@ -83,7 +83,6 @@ const getTotalBalance = (assets, source: "borrowed" | "supplied") =>
 export const computeExtraAPY = (assets, netLiquidityFarm) => {
   const totalDailyNetLiquidityRewards = Object.entries(netLiquidityFarm.rewards)
     .map(([tokenId, farm]: any) => {
-      console.info(tokenId, farm);
       const asset = assets[tokenId];
       const assetDecimals = asset.metadata.decimals + asset.config.extra_decimals;
       const dailyAmount = Number(shrinkToken(farm.reward_per_day, assetDecimals));

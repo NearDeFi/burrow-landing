@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocalStorage } from "usehooks-ts";
 
 import { getAssets } from "~/near";
 import { Asset, computeExtraAPY, transformAsset } from "~/utils";
@@ -15,7 +16,7 @@ const EMPTY_ASSET: Asset = {
 
 export const useAssets = () => {
   const [selected, setSelectedAsset] = useState<Asset>(EMPTY_ASSET);
-  const [assets, setAssets] = useState<Asset[]>([]);
+  const [assets, setAssets] = useLocalStorage<Asset[]>("assets", []);
 
   useEffect(() => {
     getAssets().then(([allAssets, netLiquidityFarm]) => {
