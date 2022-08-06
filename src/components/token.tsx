@@ -6,13 +6,14 @@ interface TokenIconProps {
   height?: number;
   className?: string;
   onClick?: () => void;
+  style?: any;
 }
 
 const TokenIcon = (props: TokenIconProps) => {
-  const { icon, width = 80, height = 80, className = "", onClick } = props;
+  const { icon, width = 80, height = 80, className = "", onClick, style = {} } = props;
 
   return (
-    <div className={className} onClick={onClick} style={{ width, height }}>
+    <div className={className} onClick={onClick} style={{ width, height, ...style }}>
       {icon ? (
         <img src={icon} style={{ width, height }} className="rounded-full" onClick={onClick} />
       ) : (

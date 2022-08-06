@@ -9,6 +9,6 @@ body,
   height: 100%;
 }
 
-.noscroll::-webkit-scrollbar {
+.noscrollbars::-webkit-scrollbar {
   display: none;
 }

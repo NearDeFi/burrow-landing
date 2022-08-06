@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import { motion, animate, useMotionValue, AnimationOptions } from "framer-motion";
+
 import TokenIcon from "./token";
 import { useAssets } from "~/hooks/burrow";
 
@@ -5,8 +8,39 @@ import { ReactComponent as HogSvg } from "~/assets/hog.svg";
 import { ReactComponent as PointerSvg } from "~/assets/pointer.svg";
 import { ReactComponent as TeethSvg } from "~/assets/teeth.svg";
 
+const INTERVAL = 3000;
+const ASSET_WIDTH = 80;
+const ASSET_GAP = 50;
+
+const transition: AnimationOptions<any> = {
+  type: "spring",
+  bounce: 0,
+};
+
 export default function Main() {
   const { assets, selected, onSelect } = useAssets();
+  const [index, setIndex] = useState(0);
+  const x = useMotionValue(0);
+
+  const calculateNewX = () =>
+    window.innerWidth / 2 - ASSET_WIDTH / 2 - (ASSET_WIDTH * index + ASSET_GAP * index);
+
+  useEffect(() => {
+    if (assets.length > 0) {
+      onSelect(assets[index]);
+    }
+    const controls = animate(x, calculateNewX(), transition);
+    return controls.stop;
+  }, [index]);
+
+  const handleNext = () => {
+    setIndex(index + 1 === assets.length ? 0 : index + 1);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => handleNext(), INTERVAL);
+    return () => clearInterval(timer);
+  }, [handleNext]);
 
   return (
     <main className="grid relative">
@@ -23,17 +57,21 @@ export default function Main() {
       <div className="flex justify-center items-end mb-[-32px]">
         <HogSvg />
       </div>
-      <div className="absolute bottom-[90px] w-full overflow-auto noscroll">
-        <div className="flex justify-center gap-[3.5rem] w-[3000px]">
-          {assets.map((a) => (
+      <div className="absolute bottom-[90px] w-full overflow-clip noscrollbars">
+        <motion.div style={{ marginLeft: x }} className="flex justify-center gap-[50px] w-[990px]">
+          {assets.map((a, i) => (
             <TokenIcon
               key={a.id}
               {...a}
-              className="cursor-pointer opacity-[0.4]"
-              onClick={() => onSelect(a)}
+              className="cursor-pointer"
+              style={{ opacity: index == i ? 1 : 0.5 }}
+              onClick={() => {
+                onSelect(a);
+                setIndex(i);
+              }}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
       <TeethSvg className="absolute bottom-[152px] left-0 right-0 ml-auto mr-auto w-[32px]" />
       <a
