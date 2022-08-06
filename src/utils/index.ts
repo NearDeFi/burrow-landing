@@ -42,6 +42,11 @@ export interface Asset {
   icon: string;
 }
 
+const symbolTransform = {
+  WBTC: "BTC",
+  wNEAR: "NEAR",
+};
+
 export const transformAsset = (asset) => {
   const tvlDec = new Decimal(asset.supplied.balance)
     .plus(new Decimal(asset.reserved))
@@ -50,9 +55,11 @@ export const transformAsset = (asset) => {
 
   const tvl = millify(toUsd(tvlDec, asset));
 
+  const symbol = symbolTransform[asset.metadata.symbol] || asset.metadata.symbol;
+
   return {
     id: asset.token_id,
-    symbol: asset.metadata.symbol,
+    symbol,
     borrowAPR: (Number(asset.borrow_apr) * 100).toLocaleString(undefined, APY_FORMAT),
     tvl,
     icon: asset.metadata.icon,
