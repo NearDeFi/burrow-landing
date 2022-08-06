@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { getAssets } from "~/near";
-import { Asset, transformAsset } from "~/utils";
+import { Asset, computeExtraAPY, transformAsset } from "~/utils";
 
 const SELECTED_ASSETS = ["DAI", "WBTC", "USDC", "AURORA", "ETH", "USDT", "USN", "wNEAR"];
 
@@ -18,14 +18,15 @@ export const useAssets = () => {
   const [assets, setAssets] = useState<Asset[]>([]);
 
   useEffect(() => {
-    getAssets().then((a) =>
+    getAssets().then(([allAssets, netLiquidityFarm]) => {
+      const extraAPY = computeExtraAPY(allAssets, netLiquidityFarm);
       setAssets(
-        Object.entries(a)
+        Object.entries(allAssets)
           .map(([, asset]) => asset)
           .filter((asset: any) => SELECTED_ASSETS.includes(asset.metadata.symbol))
-          .map(transformAsset),
-      ),
-    );
+          .map(transformAsset(extraAPY)),
+      );
+    });
   }, []);
 
   useEffect(() => {

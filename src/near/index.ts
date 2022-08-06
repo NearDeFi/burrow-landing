@@ -8,7 +8,14 @@ export const ftContractCall = async ({ contractName = CONTRACT_NAME, method, arg
   const wallet = await getWallet();
 
   const contract = new nearAPI.Contract(wallet.account(), contractName, {
-    viewMethods: ["get_asset", "get_assets_paged", "ft_metadata", "get_config", "get_price_data"],
+    viewMethods: [
+      "get_asset",
+      "get_assets_paged",
+      "ft_metadata",
+      "get_config",
+      "get_price_data",
+      "get_asset_farm",
+    ],
     changeMethods: [],
   });
 
@@ -34,5 +41,16 @@ export const getAssets = async () => {
     contractName: config["oracle_account_id"],
   });
 
-  return transformContractAssets(assetsDetailed, metadata, prices);
+  const refPrices = await fetch(
+    "https://raw.githubusercontent.com/NearDeFi/token-prices/main/ref-prices.json",
+  ).then((r) => r.json());
+
+  const netLiquidityFarm = await ftContractCall({
+    method: "get_asset_farm",
+    args: { farm_id: "NetTvl" },
+  });
+
+  const transformedAssets = transformContractAssets(assetsDetailed, metadata, prices, refPrices);
+
+  return [transformedAssets, netLiquidityFarm];
 };

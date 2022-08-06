@@ -49,7 +49,7 @@ export default function Main() {
           Burrow your <span className="text-greenish">${selected.symbol}</span>
         </h1>
         <h2 className="sm:text-[3.5rem] text-[2rem] font-semibold text-center">
-          <span className="text-greenish">{selected.tvl}</span> TVL{" "}
+          <span className="text-greenish">${selected.tvl}</span> TVL{" "}
           <span className="text-greenish">{selected.borrowAPR}%</span> APY
         </h2>
       </div>
