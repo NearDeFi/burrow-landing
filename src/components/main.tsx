@@ -14,7 +14,7 @@ const ASSET_GAP = 50;
 
 const transition: AnimationOptions<any> = {
   type: "spring",
-  bounce: 0,
+  bounce: 0.2,
 };
 
 export default function Main() {
@@ -23,7 +23,7 @@ export default function Main() {
   const x = useMotionValue(0);
 
   const calculateNewX = () =>
-    window.innerWidth / 2 - ASSET_WIDTH / 2 - (ASSET_WIDTH * index + ASSET_GAP * index);
+    window.innerWidth / 2 - ASSET_WIDTH / 2 - (ASSET_WIDTH + ASSET_GAP) * index;
 
   useEffect(() => {
     if (assets.length > 0) {

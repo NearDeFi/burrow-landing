@@ -6,7 +6,7 @@ interface TokenIconProps {
   height?: number;
   className?: string;
   onClick?: () => void;
-  style?: any;
+  style?: React.CSSProperties;
 }
 
 const TokenIcon = (props: TokenIconProps) => {
