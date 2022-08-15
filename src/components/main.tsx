@@ -45,15 +45,22 @@ export default function Main() {
   return (
     <main className="grid relative">
       <div className="flex flex-col items-center justify-center text-white bg-bgblue px-2">
-        <h1 className="sm:text-[4.5rem] text-[3rem] font-semibold text-center">
+        <h1 className="sm:text-[4.5rem] text-[2rem] font-semibold text-center">
           Burrow your <span className="text-greenish">${selected.symbol}</span>
         </h1>
-        <h2 className="sm:text-[3.5rem] text-[2rem] font-semibold text-center">
+        <h2 className="sm:text-[3.5rem] text-[1.6rem] font-semibold text-center">
           <span className="text-greenish">${selected.tvl}</span> TVL{" "}
           <span className="text-greenish">{selected.borrowAPR}%</span> APY
         </h2>
       </div>
       <PointerSvg className="w-[100%]" />
+      <a
+        className="mx-auto my-4 w-[160px] h-[48px] bg-button text-white py-2 rounded-lg font-semibold items-center flex justify-center"
+        href="https://app.burrow.cash"
+        title="Burrow Cash App"
+      >
+        Start Burrowing
+      </a>
       <div className="flex justify-center items-end mb-[-32px]">
         <HogSvg />
       </div>
@@ -74,13 +81,6 @@ export default function Main() {
         </motion.div>
       </div>
       <TeethSvg className="absolute bottom-[152px] left-0 right-0 ml-auto mr-auto w-[32px]" />
-      <a
-        className="absolute bottom-0 left-0 right-0 ml-auto mr-auto w-[160px] text-center bg-button text-white py-2 rounded-lg font-semibold"
-        href="https://app.burrow.cash"
-        title="Burrow Cash App"
-      >
-        Start Burrowing
-      </a>
     </main>
   );
 }
