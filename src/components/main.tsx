@@ -44,7 +44,7 @@ export default function Main() {
 
   return (
     <main className="grid relative">
-      <div className="flex flex-col items-center justify-center text-white bg-bgblue">
+      <div className="flex flex-col items-center justify-center text-white bg-bgblue px-2">
         <h1 className="sm:text-[4.5rem] text-[3rem] font-semibold text-center">
           Burrow your <span className="text-greenish">${selected.symbol}</span>
         </h1>

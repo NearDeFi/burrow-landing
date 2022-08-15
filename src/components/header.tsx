@@ -1,3 +1,8 @@
+import { FaDiscord } from "@react-icons/all-files/fa/FaDiscord";
+import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
+import { FaMedium } from "@react-icons/all-files/fa/FaMedium";
+import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
+
 import { ReactComponent as LogoSvg } from "~/assets/logo.svg";
 
 export default function Header() {
@@ -22,6 +27,20 @@ export default function Header() {
       >
         Docs
       </a>
+      <div className="flex gap-2 ml-auto">
+        <a href="https://discord.gg/gUWBKy9Vur" target="_blank" rel="noreferrer">
+          <FaDiscord />
+        </a>
+        <a href="https://twitter.com/burrowcash" target="_blank" rel="noreferrer">
+          <FaTwitter />
+        </a>
+        <a href="https://burrowcash.medium.com/" target="_blank" rel="noreferrer">
+          <FaMedium />
+        </a>
+        <a href="https://github.com/burrowfdn" target="_blank" rel="noreferrer">
+          <FaGithub />
+        </a>
+      </div>
     </header>
   );
 }
